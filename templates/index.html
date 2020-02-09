@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/loading.css') }}">
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/sidenav.css') }}">
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/uploadbtn.css') }}">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+         <script src="/static/lib/jquery-3.4.1.js"></script>
+
+
+
+              <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="index">Home</a>
+                {%for i in range(0, len)%}
+                  <a class = "tablinks" >{{folders[i]}}</a>
+                {%endfor%}
+
+              </div>
+
+              <div class="">
+                <span style="font-size:30px;cursor:pointer;color:white;" onclick="openNav()">&#9776; </span>
+              </div>
+
+
+              <div class="btn-wrapper">
+                <div class="upload-btn-wrapper">
+                  <button class="upbtn">Choose a file</button>
+                  <input type="file" name="myfile" />
+                </div>
+                <div class="submit">
+                  <button type="button" id="upload" class = "upload" ><span>Upload</span></button>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+                <div id="myModal" class="modal">
+
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="loader"></div>
+                  </div>
+
+                </div>
+
+     <script>
+
+                function openNav() {
+                   document.getElementById("mySidenav").style.width = "250px";
+                 }
+
+                function closeNav() {
+                   document.getElementById("mySidenav").style.width = "0";
+                 }
+                // Get the modal
+                var modal = document.getElementById("myModal");
+
+                // Get the button that opens the modal
+                var btn = document.getElementById("upload");
+
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks the button, open the modal
+                btn.onclick = function() {
+                  modal.style.display = "block";
+                  var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                      modal.style.display = "none";
+                    }
+                  };
+                  xhttp.open("POST", "/upload", true);
+                  xhttp.send();
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                  modal.style.display = "none";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                //window.onclick = function(event) {
+                //  if (event.target == modal) {
+                  //  modal.style.display = "none";
+                  //}
+                //}
+
+
+     </script>
+
+</body>
+</html>
