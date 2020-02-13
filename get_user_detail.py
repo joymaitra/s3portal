@@ -14,5 +14,5 @@ response = table.query(
 
 #print (response["Items"])
 for i in response["Items"]:
-    for j in i["project"]:
-        print(j)
+    for j in i["projects"]:
+        print(j["name"])

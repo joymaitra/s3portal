@@ -8,8 +8,6 @@ table = dynamodb.Table('WebAppUserData')
 table.put_item(
    Item={
        'userid': 'E0419074',
-       'project': ['projectfolder1','projectfolder2'],
-       'bucket':'my-lambda-2',
-       'path':'NA'
+       'projects': [{'name':'folder3','path':'folder3'},{'name':'folder4','path':'folder4'},{'name':'folder5','path':'folder5'}]
     }
 )
