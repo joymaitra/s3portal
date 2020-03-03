@@ -22,29 +22,34 @@
 
               </div>
 
-              <div class="">
+              <div>
                 <span style="font-size:30px;cursor:pointer;color:white;" onclick="openNav()">&#9776; </span>
               </div>
-
+              <div style="padding-left:120px;">
+                <a style="font-size:36px;color:white;">Enterprise Data Lake File Upload Application</a>
+              </div>
 
               <div class="btn-wrapper">
                 <form method=POST enctype=multipart/form-data id = "myForm" action="upload">
+                  <input id = "selectfolder" name = "selectfolder" style="visibility:hidden;width:0px;"/>
                   <div class="upload-btn-wrapper">
                     <button class="upbtn">Choose a file</button>
-                    <input type="file" name="myfile" id = "myfile" />
+                    <input type="file" name="myfile" id = "myfile"  onchange="fileshow()"/>
                   </div>
                   <div class="submit">
                     <button type="button" id="upload" class = "upload" ><span>Upload</span></button>
                   </div>
                 </form>  
               </div>
-
-
-
-
-
-
-
+              
+              <div style="padding-left:120px;margin-top:30px;">
+                <a style="font-size:20px;color:white;" id="highlight"></a>
+                
+                
+              </div>
+              <div style="padding-left:120px;margin-top:30px;">
+                <a style="font-size:20px;color:white;" id="highlight2"></a>
+              </div>
 
                 <div id="myModal" class="modal">
 
@@ -69,8 +74,15 @@
                    document.getElementById("main").style.marginLeft= "0";
                  }
                  
+                function fileshow(){
+                  document.getElementById("highlight2").innerHTML = "File Name : "+document.getElementById("myfile").files[0].name;
+                }
                 var g_fol_nm = ""; 
+                
+                //document.getElementById("highlight2").innerHTML = document.getElementById("myfile").files.name;
                 function folder_nm(fol_nm){
+                  document.getElementById("selectfolder").value = fol_nm;
+                  document.getElementById("selectfolder").style.display = "none";
                   y= document.getElementsByClassName("tablinks");
                   var i;
                   for (i = 0; i < y.length; i++) {
@@ -78,6 +90,7 @@
                   }
                   document.getElementById(fol_nm).style.color ="green";
                   g_fol_nm = fol_nm;
+                  document.getElementById("highlight").innerHTML="project selected : "+fol_nm;
                 }
                  
                 // Get the modal
@@ -122,7 +135,7 @@
                             type: 'POST',
                             success: function (dataofconfirm) {
                               modal.style.display = "none";
-                              alert("upload completed successfully")
+                              alert("upload completed successfully");
                             }
                           });
                     //var xhttp = new XMLHttpRequest();

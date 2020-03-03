@@ -17,7 +17,6 @@ user_tbl_dspl_nm = "name"
 param_url_token = 'userid'
 return_err_msg = "not authorized user"
 main_web_page = "index.html"
-bucket_name = 'projectfolder1'
 
 
 '''
@@ -55,7 +54,7 @@ def upload():
     time.sleep(5)
     print(request.form['selectfolder'])
     s3 = boto3.resource('s3')
-    s3.Bucket(bucket_name).put_object(Key = request.form['selectfolder']+'/'+ request.files['myfile'].filename, Body=request.files['myfile'])
+    s3.Bucket(request.form['selectfolder']).put_object(Key = 'folder1/'+ request.files['myfile'].filename, Body=request.files['myfile'])
     
     return("stop")
 
